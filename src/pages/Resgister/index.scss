@@ -1,0 +1,32 @@
+.resgister{
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  margin: auto;
+  align-items: center;
+  &-form{
+    
+    // label{
+    //   color: #fff !important;
+    // }
+   
+  }
+  &-modal{
+    .ant-modal-close-x{
+      display: none 
+    }
+   
+    .login-form-forgot {
+      float: right;
+    }
+    .ant-col-rtl .login-form-forgot {
+      float: left;
+    }
+    .login-form-button {
+      width: 100%;
+      margin-bottom: 5px;
+    }
+  }
+ 
+}
+

@@ -1,0 +1,30 @@
+.drag{
+  &__hover {
+    opacity: 0.5;
+  }
+  &__box {
+    cursor: 'move';
+    display: flex;
+    align-items: center;
+   
+    &__action{
+      display: flex;
+      i{
+        margin-left: 5px;
+      }
+    }
+    &__name{
+      width: 100%;
+    }
+  }
+ 
+  &__dustbin{
+    height: 100%;
+    width: 100%;
+  }
+}
+.box-style{
+  .drag__box{
+    margin-top: 5px;
+  }
+}

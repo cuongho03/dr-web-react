@@ -1,0 +1,1 @@
+export const FETCH_FILE_ALL = "FETCH_FILE_ALL"

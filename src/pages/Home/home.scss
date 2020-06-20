@@ -1,0 +1,67 @@
+.recents{
+  &__center{
+    justify-content: center;
+  }
+  &__cotent{
+    padding: 0px 10px 10px 10px;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+    &__tip {
+      .ant-form-explain {
+        font-size: 13px;
+      }
+   
+    }
+    &__item {
+      margin-bottom: 5px;
+      font-size: 13px;
+      &-small {
+        font-size: 12px;
+        cursor: pointer;
+      }
+      &-center {
+        text-align: center;
+      }
+      &-active {
+        color: #1890ff;
+      }
+      &-version{
+        margin-bottom: 15px;
+      }
+      &__time, &__author {
+        color: #939596;
+      }
+      &__time {
+        font-size: 11px;
+        
+      }
+      &__img{
+        height: 25px;
+      }
+    }
+    &__inline {
+      display: flex;
+      align-items: center;
+    }
+    &__box {
+      display: flex;
+      align-items: center;
+      border: 1px solid;
+      padding-left: 5px;
+      padding-right: 5px;
+      border-color: #e4dfdf;
+      margin-bottom: 10px;
+      &__icon {
+        margin-right: 5px;
+      }
+      &-second {
+        padding: 10px;
+        border-radius: 8px;
+      }
+    }
+  }
+}
+
+.button__share{
+  color: #fff!important ;
+}

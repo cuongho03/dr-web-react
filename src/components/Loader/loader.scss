@@ -1,0 +1,227 @@
+.loader {
+
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, .4);
+  z-index: 10000000;
+  opacity: 0.5;
+  transition: opacity .5s;
+  height: 100vh;
+  width: 100%;
+  .ant-spin-dot-item{
+    background-color: #ff4d4f;
+  }
+  &__container {
+    display: flex;
+  }
+
+  &__ball {
+    width: 90px;
+    align-items: center;
+    margin-right: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+
+
+    &:nth-child(1) {
+      animation: bouncing 0.4s alternate infinite cubic-bezier(0.6, 0.05, 0.15, 0.95);
+    }
+
+    &:nth-child(2) {
+      animation: bouncing 0.4s 0.1s alternate infinite cubic-bezier(0.6, 0.05, 0.15, 0.95) backwards;
+    }
+
+    &:nth-child(3) {
+      animation: bouncing 0.4s 0.2s alternate infinite cubic-bezier(0.6, 0.05, 0.15, 0.95) backwards;
+    }
+  }
+}
+
+@keyframes bouncing {
+  0% {
+    transform: translate3d(0, 10px, 0) scale(1.2, 0.85);
+  }
+
+  100% {
+    transform: translate3d(0, -20px, 0) scale(0.9, 1.1);
+  }
+}
+
+// loader hai
+
+
+.loader-quart-1 {
+  border-radius: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.5);
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  margin-right: 10px
+}
+
+.loader-quart-1:after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border: 5px solid transparent;
+  border-top-color: #5e72e4;
+  border-radius: 50px;
+
+  -webkit-animation: rotation 1s linear infinite;
+  animation: rotation 1s linear infinite;
+}
+
+@-webkit-keyframes rotation {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotation {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+
+//loading 3 dot version 2
+.loading{
+  position: relative;
+  height: 50px;
+}
+#Container .loadingContainer {
+  display: none;
+}
+
+#Container.loading .loadingContainer {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  span {
+    width: 1em;
+    height: 1em;
+
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 0.25em;
+  }
+
+  span.first {
+    animation: blinkAndWait 2s forwards linear infinite;
+  }
+
+  span.second {
+    animation: blink 1s forwards linear infinite 0.5s;
+  }
+
+  span.third {
+    animation: blinkAndWait 2s forwards linear infinite 1s;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.3;
+    width: 0.5em;
+    height: 0.5em;
+    margin: 0.25em 0.5em 0.25em 0.25em;
+  }
+
+  50% {
+    opacity: 1;
+    width: 1em;
+    height: 1em;
+    margin: 0 0.25em 0 0;
+  }
+
+  100% {
+    opacity: 0.3;
+    width: 0.5em;
+    height: 0.5em;
+    margin: 0.25em 0.5em 0.25em 0.25em;
+  }
+}
+
+@keyframes blinkAndWait {
+  0% {
+    opacity: 0.3;
+    width: 0.5em;
+    height: 0.5em;
+    margin: 0.25em 0.5em 0.25em 0.25em;
+  }
+
+  25% {
+    opacity: 1;
+    width: 1em;
+    height: 1em;
+    margin: 0 0.25em 0 0;
+  }
+
+  50% {
+    opacity: 0.3;
+    width: 0.5em;
+    height: 0.5em;
+    margin: 0.25em 0.5em 0.25em 0.25em;
+  }
+
+  100% {
+    opacity: 0.3;
+    width: 0.5em;
+    height: 0.5em;
+    margin: 0.25em 0.5em 0.25em 0.25em;
+  }
+}
+
+// loading version 4
+.load-wrap{
+  animation: loadingI 0.8s linear infinite;
+  position: relative;
+  width: 45px;
+  height: 45px;
+  margin: 0 auto;
+  &-bubble-1,&-bubble-2 {
+    position: absolute;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 100%;
+    background-color: #0089ff;
+  }
+  &-bubble-2{
+    animation: bounce 2s ease-in-out infinite;
+    top: auto;
+    bottom: 0;
+  }
+}
