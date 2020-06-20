@@ -376,7 +376,7 @@ class Home extends Component {
                 {
                   itemActive.file.type === "application/pdf" ? (
                     <div>
-                      <iframe title={itemActive.file.name} src={itemActive.file.link + '?embedded=true'}></iframe>
+                      <iframe height="500" width="100%" title={itemActive.file.name} src={`http://docs.google.com/gview?url=${itemActive.file.link}&embedded=true`}></iframe>
                     </div>
                   ) : null
                 }
