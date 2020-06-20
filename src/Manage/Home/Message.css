@@ -4818,7 +4818,7 @@ label.required:after {
 label[disabled] {
 	opacity: .35
 }
-input[type=date],
+/* input[type=date],
 input[type=datetime-local],
 input[type=datetime],
 input[type=email],
@@ -5015,7 +5015,7 @@ input[type=search] {
 }
 input[type=search]::-webkit-search-decoration {
 	-webkit-appearance: none
-}
+} */
 @media (-ms-high-contrast: none) {
 	::-ms-backdrop,
 	artdeco-slider[type=range] {
