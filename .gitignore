@@ -10,7 +10,6 @@ package-lock.json
 
 # testing
 /coverage
-git
 ./git
 
 # misc
