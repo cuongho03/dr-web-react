@@ -9,6 +9,7 @@ import 'antd/dist/antd.css';
 import Resgister from "./pages/Resgister"
 import Home from "./../src/Manage/Home"
 import LiveChat from './../src/Manage/LiveChat'
+import Profile from './../src/Manage/Profile'
 import Layout from './../src/Manage/Layout'
 import { toast, ToastContainer } from 'react-toastify'
 
@@ -36,9 +37,10 @@ class App extends Component {
     return (
       <Router>
         <Switch>
-
-          {isUserLoggedIn ? (<Route exact path="/" component={(props) => <Layout {...props} showToast={(type, message) => this.showToast(type, message)} logout={() => { }} member={member} Component={Home} active="1" />} />) : (<Route exact path="/" component={Resgister} />)}
           {isUserLoggedIn ? (<Route exact path="/live-chat" component={(props) => <Layout {...props} logout={() => { }} member={member} Component={LiveChat} active="2" />} />) : null}
+          {isUserLoggedIn ? (<Route exact path="/profile" component={(props) => <Layout {...props} logout={() => { }} member={member} Component={Profile} active="3" />} />) : null}
+          {isUserLoggedIn ? (<Route exact path="/" component={(props) => <Layout {...props} showToast={(type, message) => this.showToast(type, message)} logout={() => { }} member={member} Component={Home} active="1" />} />) : (<Route exact path="/" component={Resgister} />)}
+
           <Route component={Resgister} />
         </Switch>
       </Router>

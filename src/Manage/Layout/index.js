@@ -83,13 +83,16 @@ class LayoutManage extends Component {
             }
 
             <div style={{ width: '100%', textAlign: 'right', marginRight: '20px', cursor: 'pointer' }}>
-              <span style={{ marginRight: '10px' }}>
+              <span onClick={() => { history.push('/') }} style={{ marginRight: '10px' }}>
                 <Badge count={docterList.length}>
                   <Avatar style={{ backgroundColor: '#87d068' }} icon={<UserOutlined />} />
                 </Badge>
               </span>
-              <span onClick={() => { window.localStorage.removeItem('isUserLoggedIn'); history.push('/logout'); }}>
-                <Tooltip title="Log out">Hi, {name || ''}  </Tooltip>
+              <span onClick={() => {
+                //  window.localStorage.removeItem('isUserLoggedIn'); 
+                history.push('/profile');
+              }}>
+                <Tooltip title="Profile">Hi, {name || ''}  </Tooltip>
               </span>
 
             </div>
