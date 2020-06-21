@@ -40,7 +40,7 @@ class Main extends Component {
       if (data && typeof (data) === 'object') {
         let newData = []
         Object.keys(data).forEach(key => {
-          if (data[key] && data[key].status === 'pending' && data[key].userShare === member.id) {
+          if (data[key] && data[key].userShare === member.id) {
             const index = newData.findIndex(item => item.id === data[key].userId)
             if (index === -1) {
               newData.push({
