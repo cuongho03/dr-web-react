@@ -15,7 +15,7 @@ export default class ChatBoard extends Component {
       isShowSticker: false,
       inputValue: ''
     }
-    this.currentUserId = supportInfo.id
+    this.currentUserId = localStorage.getItem(AppString.ID) || ''
     this.currentUserAvatar = supportInfo.photoUrl
     this.currentUserNickname = supportInfo.nickName
     this.listMessage = []
