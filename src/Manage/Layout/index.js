@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import { Layout, Menu, Tooltip, Avatar, Badge } from 'antd';
-import { HomeOutlined, MenuOutlined, MenuFoldOutlined, WechatOutlined, UserOutlined } from '@ant-design/icons';
+import { HomeOutlined, MenuOutlined, MenuFoldOutlined, WechatOutlined, UserOutlined, AudioOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom'
 import logo_Final from '../../images/logo_Final_cut.png';
 import { FirebaseRef } from '../../lib/firebase'
@@ -73,6 +73,10 @@ class LayoutManage extends Component {
             <Menu.Item onClick={() => { history.push('/') }} key="1">
               <HomeOutlined />
               <span>Notify</span>
+            </Menu.Item>
+            <Menu.Item onClick={() => { history.push('/recordings') }} key="4">
+              <AudioOutlined />
+              <span>Recordings</span>
             </Menu.Item>
           </Menu>
         </Sider>
