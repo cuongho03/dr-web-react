@@ -221,6 +221,7 @@
   }
   .viewListUser{
     overflow-y: unset;
+    width: 100vh;
   }
   /* .textItem{
     max-width: 100px;
@@ -230,5 +231,8 @@
   } */
   .viewBoard{
     min-height: calc(100vh - 100px);
+  }
+  .ant-modal-body{
+    padding: unset;
   }
 }
