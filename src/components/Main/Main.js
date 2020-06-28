@@ -182,25 +182,52 @@ class Main extends Component {
   }
 
   render() {
+    let show = true
+    let showList = true
+    const isMobile = window.innerWidth < 768;
+    const { currentPeerUser } = this.state
+    if (isMobile && !this.listUser.length) {
+      show = false
+    } else if (isMobile && !currentPeerUser) {
+      show = false
+    }
+
+    if (isMobile && currentPeerUser) {
+      showList = false
+    }
+
     return (
       <div>
 
         {/* Body */}
         <div className="body">
-          <div className="viewListUser"> {this.renderListUser()}</div>
-          <div className="viewBoard">
-            {this.state.currentPeerUser ? (
-              <ChatBoard
-                currentPeerUser={this.state.currentPeerUser}
-                showToast={this.props.showToast}
-              />
-            ) : (
-                <WelcomeBoard
-                  currentUserNickname={this.currentUserNickname}
-                  currentUserAvatar={this.currentUserAvatar}
+          {showList && (
+            <div className="viewListUser"> {this.renderListUser()}</div>
+
+          )}
+
+          {show && (
+            <div className="viewBoard">
+              {this.state.currentPeerUser ? (
+                <ChatBoard
+                  currentPeerUser={this.state.currentPeerUser}
+                  showToast={this.props.showToast}
+                  onBack={() => {
+                    this.setState({
+                      currentPeerUser: null
+                    })
+                  }}
                 />
-              )}
-          </div>
+              ) : (
+                  <WelcomeBoard
+                    currentUserNickname={this.currentUserNickname}
+                    currentUserAvatar={this.currentUserAvatar}
+                  />
+                )}
+            </div>
+
+          )}
+
         </div>
 
         {/* Dialog confirm */}

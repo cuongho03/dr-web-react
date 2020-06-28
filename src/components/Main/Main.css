@@ -209,3 +209,26 @@
     flex: 1;
     max-height: 100vh;
 }
+
+@media(max-width: 768px) {
+  .ant-layout-sider-collapsed {
+    display: none
+  }
+  .ant-layout-content{
+    padding: unset !important;
+    margin: unset !important;
+    margin-top: 10px !important;
+  }
+  .viewListUser{
+    overflow-y: unset;
+  }
+  /* .textItem{
+    max-width: 100px;
+  }
+  .viewWrapItem{
+    width: auto;
+  } */
+  .viewBoard{
+    min-height: calc(100vh - 100px);
+  }
+}

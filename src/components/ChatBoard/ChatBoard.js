@@ -6,7 +6,7 @@ import images from '../Themes/Images'
 import './ChatBoard.css'
 import '../Main/Main.css'
 import { AppString, supportInfo } from './../ChatBox/Const'
-
+import { ArrowLeftOutlined } from '@ant-design/icons';
 export default class ChatBoard extends Component {
   constructor(props) {
     super(props)
@@ -182,15 +182,19 @@ export default class ChatBoard extends Component {
   }
 
   render() {
+    const isMobile = window.innerWidth < 768;
+    const { onBack } = this.props
     return (
       <div className="viewChatBoard">
         {/* Header */}
         <div className="headerChatBoard">
+          {isMobile && (
+            <ArrowLeftOutlined onClick={() => { if (onBack) { onBack() } }} style={{ color: "#203152", position: 'absolute', left: '10px' }} />
+          )}
+
           <div
             className="viewAvatarItem viewAvatarItem-Second"
             style={{ backgroundColor: this.currentPeerUser.color || 'black' }}
-
-
           >
             {this.currentPeerUser.nickname.toUpperCase().substring(0, 1)}
           </div>

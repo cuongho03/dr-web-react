@@ -15,7 +15,7 @@ class LayoutManage extends Component {
     const hostName = window.location.hostname
     const arrayHost = hostName.split(".")
     this.state = {
-      collapsed: false,
+      collapsed: window.innerWidth < 768 || false,
       docterList: [],
       name: arrayHost[0]
     };
@@ -54,8 +54,8 @@ class LayoutManage extends Component {
 
 
   render() {
-    const { Component, history, member, active, logout, name } = this.props
-    const { docterList } = this.state
+    const { Component, history, member, active, logout } = this.props
+    const { docterList, name } = this.state
     return (
       <Layout>
         <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
@@ -74,7 +74,7 @@ class LayoutManage extends Component {
               <HomeOutlined />
               <span>Notify</span>
             </Menu.Item>
-            <Menu.Item onClick={() => { history.push('/recordings') }} key="4">
+            <Menu.Item onClick={() => { window.open('http://live.genchealth.com/b/cuo-d6n-re9', '_blank'); }} key="4">
               <AudioOutlined />
               <span>Recordings</span>
             </Menu.Item>

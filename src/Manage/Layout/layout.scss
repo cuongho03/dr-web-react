@@ -24,3 +24,9 @@
   color: #ffff;
   margin-left: 5px;
 }
+
+@media(max-width: 768px) {
+  .ant-layout-sider-collapsed {
+    display: none
+  }
+}
