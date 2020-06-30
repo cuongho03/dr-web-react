@@ -59,6 +59,7 @@ class Main extends Component {
 
         if (newArray.length > 0) {
           this.listUser = [...newArray]
+          console.log(this.listUser)
         }
         this.setState({ isLoading: false })
       } else {
