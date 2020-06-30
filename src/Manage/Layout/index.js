@@ -74,7 +74,7 @@ class LayoutManage extends Component {
               <HomeOutlined />
               <span>Notify</span>
             </Menu.Item>
-            <Menu.Item onClick={() => { window.open('http://live.genchealth.com/b/cuo-d6n-re9', '_blank'); }} key="4">
+            <Menu.Item onClick={() => { window.open('http://live.genchealth.com', '_blank'); }} key="4">
               <AudioOutlined />
               <span>Recordings</span>
             </Menu.Item>
