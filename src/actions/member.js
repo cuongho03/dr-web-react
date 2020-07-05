@@ -1,6 +1,6 @@
 
 
-import { USER_DETAILS_UPDATE, USER_LOGIN, USER_RESET } from '../constants/memberTypes'
+import { USER_DETAILS_UPDATE, USER_LOGIN } from '../constants/memberTypes'
 import store from '../store'
 import serviceUser from "../services/member"
 /**
@@ -51,7 +51,7 @@ export function login(formData) {
       publicKey: email
     }
   }
-  return new Promise(async (resolve, reject) => {
+  return new Promise(async (resolve) => {
     serviceUser.Login(data).then(result => {
       if (result) {
         const { user = {} } = result
@@ -77,7 +77,7 @@ export function login(formData) {
   * Reset Password
   */
 export function resetPassword(formData) {
-  const { email } = formData
+
 
 
 }

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
-import { myFirebase, myFirestore, FirebaseRef } from '../../lib/firebase'
+import { myFirebase, FirebaseRef } from '../../lib/firebase'
 import Loader from '../Loader'
 import WelcomeBoard from '../WelcomeBoard/WelcomeBoard'
 import './Main.css'
 import ChatBoard from './../ChatBoard/ChatBoard'
-import { AppString, supportInfo } from './../ChatBox/Const'
+import { supportInfo } from './../ChatBox/Const'
 
 class Main extends Component {
   constructor(props) {

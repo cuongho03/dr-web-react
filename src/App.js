@@ -11,6 +11,7 @@ import Home from "./../src/Manage/Home"
 import LiveChat from './../src/Manage/LiveChat'
 import Profile from './../src/Manage/Profile'
 import BigBlue from './../src/Manage/BigBlue'
+import Service from './../src/Manage/Service'
 import Layout from './../src/Manage/Layout'
 import { toast, ToastContainer } from 'react-toastify'
 
@@ -41,6 +42,8 @@ class App extends Component {
           {isUserLoggedIn ? (<Route exact path="/live-chat" component={(props) => <Layout {...props} logout={() => { }} member={member} Component={LiveChat} active="2" />} />) : null}
           {isUserLoggedIn ? (<Route exact path="/profile" component={(props) => <Layout {...props} logout={() => { }} member={member} Component={Profile} active="3" />} />) : null}
           {isUserLoggedIn ? (<Route exact path="/recordings" component={(props) => <Layout {...props} logout={() => { }} member={member} Component={BigBlue} active="4" />} />) : null}
+          {isUserLoggedIn ? (<Route exact path="/services" component={(props) => <Layout {...props} logout={() => { }} member={member} Component={BigBlue} active="5" />} />) : null}
+          {isUserLoggedIn ? (<Route exact path="/services/:id" component={(props) => <Layout {...props} logout={() => { }} member={member} Component={Service} active="5" />} />) : null}
           {isUserLoggedIn ? (<Route exact path="/" component={(props) => <Layout {...props} showToast={(type, message) => this.showToast(type, message)} logout={() => { }} member={member} Component={Home} active="1" />} />) : (<Route exact path="/" component={Resgister} />)}
 
           <Route component={Resgister} />

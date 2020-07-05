@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import { Layout, Menu, Tooltip, Avatar, Badge } from 'antd';
-import { HomeOutlined, MenuOutlined, MenuFoldOutlined, WechatOutlined, UserOutlined, AudioOutlined } from '@ant-design/icons';
+import { HomeOutlined, MenuOutlined, MenuFoldOutlined, WechatOutlined, UserOutlined, CloudServerOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom'
 import logo_Final from '../../images/logo_Final_cut.png';
 import { FirebaseRef } from '../../lib/firebase'
@@ -54,7 +54,7 @@ class LayoutManage extends Component {
 
 
   render() {
-    const { Component, history, member, active, logout } = this.props
+    const { Component, history, member, active } = this.props
     const { docterList, name } = this.state
     return (
       <Layout>
@@ -75,8 +75,12 @@ class LayoutManage extends Component {
               <span>Notify</span>
             </Menu.Item>
             <Menu.Item onClick={() => { window.open('http://live.genchealth.com', '_blank'); }} key="4">
-              <AudioOutlined />
-              <span>Recordings</span>
+              <AppstoreAddOutlined />
+              <span>Application</span>
+            </Menu.Item>
+            <Menu.Item onClick={() => { history.push('/services') }} key="5">
+              <CloudServerOutlined />
+              <span>Services</span>
             </Menu.Item>
           </Menu>
         </Sider>

@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 /* eslint-disable react/react-in-jsx-scope */
 import React, { Component } from 'react'
 import { Upload, message, Form, Input, Button } from 'antd';
