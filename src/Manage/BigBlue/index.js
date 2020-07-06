@@ -107,6 +107,7 @@ class BigBlue extends Component {
       </div>
     );
     const { imageUrl, visible, data, data1, data2 } = this.state;
+    const typeArray = ['Diagnose at the office', 'Diagnose videos realtime', 'Diagnose audio realtime']
     return (
       <>
         <div className="bigBlue">
@@ -119,7 +120,7 @@ class BigBlue extends Component {
 
             <div className="product-details">
 
-              <h1> {data.typeService || 'Diagnose at the office'}</h1>
+              <h1> {typeArray[0]}</h1>
 
               <span className="hint-star star">
                 {/* <i style={{ marginRight: '5px' }} class="fa fa-trophy" aria-hidden="true"></i> */}
@@ -168,7 +169,7 @@ class BigBlue extends Component {
 
             <div className="product-details">
 
-              <h1> {data1.typeService || 'Diagnose videos realtime'}</h1>
+              <h1> {typeArray[1]}</h1>
 
               <span className="hint-star star">
                 {/* <i style={{ marginRight: '5px' }} class="fa fa-trophy" aria-hidden="true"></i> */}
@@ -182,7 +183,7 @@ class BigBlue extends Component {
 
               <div className="control">
 
-                <button onClick={() => { this.props.history.push("/services/service") }} className="btn">
+                <button onClick={() => { this.props.history.push("/services/service-1") }} className="btn">
 
                   <span className="price"> {data1.price || '20'} $</span>
 
@@ -218,7 +219,7 @@ class BigBlue extends Component {
 
             <div className="product-details">
 
-              <h1> {data2.typeService || 'Diagnose audio realtime'}</h1>
+              <h1>{typeArray[2]}</h1>
 
               <span className="hint-star star">
                 {/* <i style={{ marginRight: '5px' }} class="fa fa-trophy" aria-hidden="true"></i> */}
@@ -232,7 +233,7 @@ class BigBlue extends Component {
 
               <div className="control">
 
-                <button onClick={() => { this.props.history.push("/services/service") }} className="btn">
+                <button onClick={() => { this.props.history.push("/services/service-2") }} className="btn">
 
                   <span className="price"> {data2.price || '30'} $</span>
 

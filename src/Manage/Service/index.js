@@ -42,6 +42,7 @@ class Service extends Component {
     let type = 0
     const origin = window.location.origin;
     let imageUrl = origin + "/assets/img/docter.jpg"
+    const parentId = localStorage.getItem("id")
     if (this.id === "service-1") {
       type = 1
       imageUrl = origin + "/assets/img/docter1.jpg"
@@ -62,7 +63,8 @@ class Service extends Component {
         status: 'Unpublish'
       },
       item: {},
-      link: origin + "/subscribe/" + token
+      link: origin + `/subscribe/${this.id}${parentId}/token` + token,
+      listData: []
     }
   }
 
@@ -82,6 +84,27 @@ class Service extends Component {
         loading: false
       })
     })
+
+    const ref2 = FirebaseRef.child(`Data/${this.id}${parentId}`)
+
+    ref2.on('value', snapshot => {
+      const data = snapshot.val()
+      if (data && typeof (data) === 'object') {
+        let newData = []
+        Object.keys(data).forEach(key => {
+          newData.push({
+            ...data[key],
+            id: key,
+            type2: data[key].type
+          })
+        })
+        const newArray = newData.reverse()
+
+        this.setState({ listData: newArray })
+      }
+
+    })
+
   }
 
   handleChange = info => {
@@ -105,7 +128,14 @@ class Service extends Component {
   }
 
   confirm(id) {
-    console.log(id)
+    const parentId = localStorage.getItem("id")
+    const ref = FirebaseRef.child(`Data/${this.id}${parentId}/${id}`)
+    ref.remove().then(() => {
+
+
+    }).catch(err => {
+      message.error(err)
+    })
 
   }
 
@@ -148,13 +178,13 @@ class Service extends Component {
         <div className="ant-upload-text">Upload</div>
       </div>
     );
-    const { data, loading, link } = this.state;
-
+    const { data, loading, link, listData } = this.state;
+    console.log(listData)
     const columns = [
       {
         title: 'Customer name',
-        dataIndex: 'email',
-        key: 'email',
+        dataIndex: 'name',
+        key: 'name',
       },
       {
         title: 'Customer email',
@@ -286,9 +316,16 @@ class Service extends Component {
           </div>
           <div className="col col-md-6">
             <h4>Customer Subscribes</h4>
-            <Table style={{ marginTop: '10px' }} bordered dataSource={[]} columns={columns} />
+            <Table style={{ marginTop: '10px' }} bordered dataSource={listData} columns={columns} />
             <div style={{ marginTop: 16, cursor: 'copy' }}>
-              <Input disabled addonAfter={<div onClick={() => { this.copyToClipboard(link);; message.success("Copy link succesfully!") }}>Copy</div>}
+              <Input disabled addonAfter={<div onClick={() => {
+                if (data.status === 'Publish') {
+                  this.copyToClipboard(link);
+                  message.success("Copy link succesfully!")
+                } else {
+                  message.warn("Copy link fail, your need to change status your service to publish and click button edit")
+                }
+              }}>Copy</div>}
                 value={link} />
             </div>
           </div>
