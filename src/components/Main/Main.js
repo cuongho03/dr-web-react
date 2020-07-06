@@ -46,9 +46,9 @@ class Main extends Component {
               newData.push({
                 ...data[key],
                 id: data[key].userId,
-                nickname: data[key].nickname || 'unknow',
+                nickname: data[key].patientName || 'unknow',
                 photoUrl: '',
-                aboutMe: '',
+                aboutMe: data[key].email || 'Not available',
                 color: data[key].color || 'black'
               })
             }
