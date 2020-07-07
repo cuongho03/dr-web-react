@@ -1,28 +1,26 @@
 /* eslint-disable react/react-in-jsx-scope */
 import React, { Component } from 'react'
 import "./index.scss"
+import { uploadMutipleFile } from '../../actions/uploadFile'
 import { Button, Form, Input, message, Upload, Select, Checkbox, InputNumber, Table, Tag, Popconfirm } from 'antd';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import { FirebaseRef } from '../../lib/firebase'
 import jwt from "jsonwebtoken"
 const { Option } = Select;
 
-function getBase64(img, callback) {
-  const reader = new FileReader();
-  reader.addEventListener('load', () => callback(reader.result));
-  reader.readAsDataURL(img);
-}
+// function getBase64(img, callback) {
+//   const reader = new FileReader();
+//   reader.addEventListener('load', () => callback(reader.result));
+//   reader.readAsDataURL(img);
+// }
 
 function beforeUpload(file) {
   const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
   if (!isJpgOrPng) {
     message.error('You can only upload JPG/PNG file!');
   }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error('Image must smaller than 2MB!');
-  }
-  return isJpgOrPng && isLt2M;
+
+  return true;
 }
 
 class Service extends Component {
@@ -41,18 +39,19 @@ class Service extends Component {
     this.id = props.match.params.id
     let type = 0
     const origin = window.location.origin;
-    let imageUrl = origin + "/assets/img/docter.jpg"
+    let imageUrl = "/assets/img/docter.jpg"
     const parentId = localStorage.getItem("id")
     if (this.id === "service-1") {
       type = 1
-      imageUrl = origin + "/assets/img/docter1.jpg"
+      imageUrl = "/assets/img/docter1.jpg"
     } else if (this.id === "service-2") {
       type = 2
-      imageUrl = origin + "/assets/img/docter2.png"
+      imageUrl = "/assets/img/docter2.png"
     }
     console.log(token)
     this.state = {
       loading: true,
+      loadData: true,
       data: {
         typeService: type,
         price: 0,
@@ -81,7 +80,7 @@ class Service extends Component {
         })
       }
       this.setState({
-        loading: false
+        loadData: false
       })
     })
 
@@ -112,17 +111,20 @@ class Service extends Component {
       this.setState({ loading: true });
       return;
     }
-    if (info.file.status === 'done') {
-      // Get this url from response in real world.
-      getBase64(info.file.originFileObj, imageUrl =>
-        this.setState({
-          data: {
-            ...this.state.data,
-            imageUrl,
-          },
-          loading: false,
-        }),
-      );
+    if (info.file.status === 'done' || info.file.status === 'error') {
+      uploadMutipleFile(info.file.originFileObj, `Service`).then(result => {
+        const { url, isSuccess } = result
+        if (isSuccess) {
+          this.setState({
+            data: {
+              ...this.state.data,
+              imageUrl: url,
+            },
+            loading: false,
+          })
+        }
+      })
+
     }
 
   }
@@ -140,8 +142,10 @@ class Service extends Component {
   }
 
   onFinish = values => {
+    const { data } = this.state
     const parentId = localStorage.getItem("id")
     const ref = FirebaseRef.child(`Severice/${this.id}${parentId}`)
+    values.imageUrl = data.imageUrl
     ref.set({
       ...values
     }).then(() => {
@@ -178,8 +182,8 @@ class Service extends Component {
         <div className="ant-upload-text">Upload</div>
       </div>
     );
-    const { data, loading, link, listData } = this.state;
-    console.log(listData)
+    const { data, loadData, link, listData } = this.state;
+
     const columns = [
       {
         title: 'Customer name',
@@ -229,7 +233,7 @@ class Service extends Component {
         <div className="row">
           <div className="col col-md-6">
             <h4>Service Detail</h4>
-            {!loading ? (
+            {!loadData ? (
               <Form
                 layout={"vertical"}
                 onFinish={this.onFinish}

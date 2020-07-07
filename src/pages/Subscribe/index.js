@@ -32,20 +32,24 @@ class Subscribe extends Component {
       }
 
     })
-  }
-  componentWillUnmount() {
-    const { data } = this.state
-    if (!data.view) {
-      data.view = 1
-    } else {
-      data.view += 1
-    }
+    setTimeout(() => {
+      const { data } = this.state
+      if (data.typeService) {
+        if (!data.view) {
+          data.view = 1
+        } else {
+          data.view += 1
+        }
 
-    const ref = FirebaseRef.child(`Severice/${this.id}`)
-    ref.set({
-      ...data
-    })
+        const ref = FirebaseRef.child(`Severice/${this.id}`)
+        ref.set({
+          ...data
+        })
+      }
+
+    }, 4000)
   }
+
 
   showModal = () => {
     this.setState({
