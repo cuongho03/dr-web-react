@@ -91,7 +91,7 @@ class Subscribe extends Component {
     const ref2 = FirebaseRef.child(`Data/${this.id}/${key}`)
     ref2.set({
       ...values,
-      note: ''
+      note: 'None'
     }).then(() => {
       message.success("subscribe successfully, We will connect with you soon!")
       this.handleCancel()

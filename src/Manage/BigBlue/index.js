@@ -113,7 +113,7 @@ class BigBlue extends Component {
         <div className="bigBlue">
           <div className="bigBlue__full">
             <Button onClick={() => { this.showModal() }} type="primary" shape="round" icon={<PullRequestOutlined />} size={'large'}>
-              {data.name || 'Request services'}
+              {'Request services'}
             </Button>
           </div>
           <div className="container-id">

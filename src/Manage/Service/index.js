@@ -3,9 +3,11 @@ import React, { Component } from 'react'
 import "./index.scss"
 import { uploadMutipleFile } from '../../actions/uploadFile'
 import { Button, Form, Input, message, Upload, Select, Checkbox, InputNumber, Table, Tag, Popconfirm } from 'antd';
-import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
+import { LoadingOutlined, PlusOutlined, EyeOutlined } from '@ant-design/icons';
 import { FirebaseRef } from '../../lib/firebase'
 import jwt from "jsonwebtoken"
+import { EditableCell, EditableFormRow, } from './../../components/CustomerTable'
+
 const { Option } = Select;
 
 // function getBase64(img, callback) {
@@ -62,7 +64,7 @@ class Service extends Component {
         status: 'Unpublish'
       },
       item: {},
-      link: origin + `/subscribe/${this.id}${parentId}/token` + token,
+      link: origin + `/subscribe/${this.id}${parentId}/token/` + token,
       listData: []
     }
   }
@@ -72,7 +74,7 @@ class Service extends Component {
     const ref = FirebaseRef.child(`Severice/${this.id}${parentId}`)
 
     ref.on('value', snapshot => {
-      const data = snapshot.val() || null
+      const data = snapshot.val() || []
       if (data) {
         console.log(data)
         this.setState({
@@ -88,7 +90,7 @@ class Service extends Component {
 
     ref2.on('value', snapshot => {
       const data = snapshot.val()
-      if (data && typeof (data) === 'object') {
+      if (data) {
         let newData = []
         Object.keys(data).forEach(key => {
           newData.push({
@@ -175,6 +177,17 @@ class Service extends Component {
     }
   }
 
+  handleSave = row => {
+    const parentId = localStorage.getItem("id")
+    const ref = FirebaseRef.child(`/Data/${this.id}${parentId}/${row.id}`)
+
+    ref.set({
+      name: row.name,
+      email: row.email,
+      note: row.note
+    })
+  };
+
   render() {
     const uploadButton = (
       <div>
@@ -189,13 +202,16 @@ class Service extends Component {
         title: 'Customer name',
         dataIndex: 'name',
         key: 'name',
+        editable: true,
       },
       {
         title: 'Customer email',
         dataIndex: 'email',
         key: 'email',
+        editable: true,
       },
       {
+        editable: true,
         title: 'Note',
         dataIndex: 'note',
         key: 'note',
@@ -206,13 +222,11 @@ class Service extends Component {
         render: (text, record) => (
           <span style={{ display: "flex", }}>
 
-            <Tag onClick={() => {
-              this.setState({
-                item: record
-              })
+            {/* <Tag onClick={() => {
+              console.log(record)
             }} color={"green"} key={"edit"}>
               Edit
-             </Tag>
+             </Tag> */}
 
             <Popconfirm placement="top" title={"Are you sure delete this item ?"} onConfirm={() => { this.confirm(record.id) }} okText="yes" cancelText="no">
 
@@ -226,6 +240,28 @@ class Service extends Component {
       },
     ];
 
+    const components = {
+      body: {
+        row: EditableFormRow,
+        cell: EditableCell,
+      },
+    };
+
+    const newColumns = columns.map(col => {
+      if (!col.editable) {
+        return col;
+      }
+      return {
+        ...col,
+        onCell: record => ({
+          record,
+          editable: col.editable,
+          dataIndex: col.dataIndex,
+          title: col.title,
+          handleSave: (record) => { this.handleSave(record) },
+        }),
+      };
+    });
 
 
     return (
@@ -309,10 +345,15 @@ class Service extends Component {
                     </Form.Item>
                   ) : null
                 }
-                <Button shape="round" type="primary" htmlType="submit">
-                  Edit
-              </Button>
-
+                <Button style={{ marginRight: '10px' }} shape="round" type="primary" htmlType="submit">
+                  Save
+                 </Button>
+                <Button disabled={data.status !== 'Publish'} shape="round" onClick={() => {
+                  const parentId = localStorage.getItem("id")
+                  this.props.history.push(`/view/${this.id}${parentId}/service`)
+                }} icon={<EyeOutlined />}  >
+                  View
+                 </Button>
               </Form>
 
             ) : null}
@@ -320,14 +361,14 @@ class Service extends Component {
           </div>
           <div className="col col-md-6">
             <h4>Customer Subscribes</h4>
-            <Table style={{ marginTop: '10px' }} bordered dataSource={listData} columns={columns} />
+            <Table style={{ marginTop: '10px' }} rowClassName={() => 'editable-row'} bordered components={components} columns={newColumns} dataSource={listData} />
             <div style={{ marginTop: 16, cursor: 'copy' }}>
               <Input disabled addonAfter={<div onClick={() => {
                 if (data.status === 'Publish') {
                   this.copyToClipboard(link);
                   message.success("Copy link succesfully!")
                 } else {
-                  message.warn("Copy link fail, your need to change status your service to publish and click button edit")
+                  message.warn("Copy link fail, your need to change status your service to publish and click button Save")
                 }
               }}>Copy</div>}
                 value={link} />

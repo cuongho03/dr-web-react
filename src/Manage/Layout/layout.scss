@@ -24,6 +24,16 @@
   color: #ffff;
   margin-left: 5px;
 }
+.layout{
+  &__back{
+    display: flex !important; 
+    align-items: center !important;
+    cursor: pointer;
+  }
+  &__back:hover {
+    opacity: 0.7;
+  }
+}
 
 @media(max-width: 768px) {
   .ant-layout-sider-collapsed {

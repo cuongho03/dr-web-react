@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react'
 import { Layout, Menu, Tooltip, Avatar, Badge } from 'antd';
-import { HomeOutlined, MenuOutlined, MenuFoldOutlined, WechatOutlined, UserOutlined, CloudServerOutlined, AppstoreAddOutlined } from '@ant-design/icons';
+import { HomeOutlined, MenuOutlined, MenuFoldOutlined, WechatOutlined, UserOutlined, CloudServerOutlined, AppstoreAddOutlined, ArrowLeftOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom'
 import logo_Final from '../../images/logo_Final_cut.png';
 import { FirebaseRef } from '../../lib/firebase'
@@ -54,7 +54,7 @@ class LayoutManage extends Component {
 
 
   render() {
-    const { Component, history, member, active } = this.props
+    const { Component, history, member, active, onBack, isBack } = this.props
     const { docterList, name } = this.state
     return (
       <Layout>
@@ -89,6 +89,14 @@ class LayoutManage extends Component {
             {
               this.state.collapsed ? (<MenuOutlined className="trigger" onClick={this.toggle}></MenuOutlined>) : (<MenuFoldOutlined onClick={this.toggle} className="trigger"></MenuFoldOutlined>)
             }
+            {isBack ? (
+              <div onClick={() => {
+                if (onBack) {
+                  onBack()
+                }
+              }} className="layout__back"><ArrowLeftOutlined style={{ marginLeft: '10px', marginRight: '10px' }} /> Back</div>
+
+            ) : null}
 
             <div style={{ width: '100%', textAlign: 'right', marginRight: '20px', cursor: 'pointer' }}>
               <span onClick={() => { history.push('/') }} style={{ marginRight: '10px' }}>
