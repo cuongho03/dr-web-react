@@ -15,7 +15,7 @@ import Service from './../src/Manage/Service'
 import Layout from './../src/Manage/Layout'
 import Subscribe from './../src/pages/Subscribe'
 import { toast, ToastContainer } from 'react-toastify'
-
+import 'react-owl-carousel2/lib/styles.css';
 
 class App extends Component {
 
@@ -40,13 +40,14 @@ class App extends Component {
     return (
       <Router>
         <Switch>
+          <Route exact path="/subscribe/:id/:token" component={Subscribe} />
           {isUserLoggedIn ? (<Route exact path="/live-chat" component={(props) => <Layout {...props} logout={() => { }} member={member} Component={LiveChat} active="2" />} />) : null}
           {isUserLoggedIn ? (<Route exact path="/profile" component={(props) => <Layout {...props} logout={() => { }} member={member} Component={Profile} active="3" />} />) : null}
           {isUserLoggedIn ? (<Route exact path="/recordings" component={(props) => <Layout {...props} logout={() => { }} member={member} Component={BigBlue} active="4" />} />) : null}
           {isUserLoggedIn ? (<Route exact path="/services" component={(props) => <Layout {...props} logout={() => { }} member={member} Component={BigBlue} active="5" />} />) : null}
-          {isUserLoggedIn ? (<Route exact path="/services/:id" component={(props) => <Layout {...props} logout={() => { }} member={member} Component={Service} active="5" />} />) : null}
           {isUserLoggedIn ? (<Route exact path="/view/:id/service" component={(props) => <Layout isBack={true} onBack={() => { props.history.goBack() }} {...props} logout={() => { }} member={member} Component={Subscribe} active="5" />} />) : null}
-          <Route exact path="/subscribe/:id/:token" component={Subscribe} />
+
+          {isUserLoggedIn ? (<Route exact path="/services/:id" component={(props) => <Layout {...props} logout={() => { }} member={member} Component={Service} active="5" />} />) : null}
           {isUserLoggedIn ? (<Route exact path="/" component={(props) => <Layout {...props} showToast={(type, message) => this.showToast(type, message)} logout={() => { }} member={member} Component={Home} active="1" />} />) : (<Route exact path="/" component={Resgister} />)}
 
           <Route component={Resgister} />

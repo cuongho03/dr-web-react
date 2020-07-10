@@ -64,7 +64,7 @@ class Service extends Component {
         status: 'Unpublish'
       },
       item: {},
-      link: origin + `/subscribe/${this.id}${parentId}/token/` + token,
+      link: origin + `/subscribe/${this.id}${parentId}/` + token,
       listData: []
     }
   }

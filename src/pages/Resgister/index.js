@@ -29,7 +29,7 @@ class Resgister extends Component {
     }
   }
   render() {
-
+    const { isLogin } = this.state
     return (
 
       <div className="App Upload">
@@ -38,14 +38,25 @@ class Resgister extends Component {
 
           <div className="clearfix" />
           <div className="container resgister">
-
-            <Login onClickLink={() => {
-              this.setState({
-                isLogin: false
-              })
-            }}
-              handleLoginSuccess={() => { this.props.history.push("/") }} />
-
+            {
+              isLogin ? (
+                <Login onClickLink={() => {
+                  this.setState({
+                    isLogin: false
+                  })
+                }}
+                  handleLoginSuccess={() => { this.props.history.push("/") }} />
+              ) :
+                (
+                  <SignUp
+                    onClickLink={() => {
+                      this.setState({
+                        isLogin: true
+                      })
+                    }}
+                    handleResgiterSuccess={() => { this.props.history.push("/") }} />
+                )
+            }
 
 
           </div>
