@@ -4,7 +4,7 @@ function sendMail(data) {
 
   return requestService.send({
     method: 'post',
-    path: 'https://webhook-twillio.herokuapp.com/sendmail',
+    path: 'https://send-grid-mail.herokuapp.com/sendmail',
     data: { ...data },
   })
 }
